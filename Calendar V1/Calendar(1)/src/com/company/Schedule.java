@@ -13,7 +13,7 @@ public class Schedule extends JFrame {
     private JButton button = new JButton("Ввод");
     private JTextField inputplan = new JTextField("",5);
     private JTextField inputdate = new JTextField("",5);
-    private JTextField input1 = new JTextField("",5);
+    private JTextField inputtime = new JTextField("",5);
     private JLabel label = new JLabel("Введите сегодняшние цели");
     public Schedule(){
         super("Рассписание");
@@ -22,10 +22,11 @@ public class Schedule extends JFrame {
 
         //Добавление "переменных" в окно
         Container container = this.getContentPane();
-        container.setLayout(new GridLayout(3, 2, 2, 2));
+        container.setLayout(new GridLayout(5, 2, 2, 2));
         container.add(label);
         container.add(inputplan);
         container.add(inputdate);
+        container.add(inputtime);
 
         //Добавление кнопок в окно
         ButtonGroup group = new ButtonGroup();
@@ -37,7 +38,7 @@ public class Schedule extends JFrame {
     class ButtonEventListener implements ActionListener{//вывод текста в другое окно
         public void actionPerformed(ActionEvent e){
             try {
-                dbHandler.addcolomnsplan(inputplan.getText(), inputdate.getText());
+                dbHandler.addcolomnsplan(inputplan.getText(), inputdate.getText(), inputtime.getText()+":00");
                 Example.missdate=0;
             } catch (ClassNotFoundException ex) {
                 ex.printStackTrace();

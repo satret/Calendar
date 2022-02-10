@@ -13,16 +13,19 @@ public class DatabaseHandler extends Configs {
             System.out.println("Успешное подключение");
         }
     }
-    public void addcolomnsplan(String plans, String date)
+    public void addcolomnsplan(String plans, String date, String time)
             throws ClassNotFoundException, SQLException {
         try (Connection conn = DriverManager.getConnection(connectionString, dbUser, dbPass);
              Statement statement = conn.createStatement()) {
             //statement.executeUpdate("drop table Books");
             //statement.executeUpdate("CREATE TABLE IF NOT EXISTS Books (id MEDIUMINT NOT NULL AUTO_INCREMENT, name CHAR(30) NOT NULL, PRIMARY KEY (id));");
-            String sql = "INSERT INTO Books (name, date) VALUES (?,?)";
+            String sql = "INSERT INTO Books (name, date, time, status) VALUES (?,?,?,?)";
+            String status = "Запланировано";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, plans);
             stmt.setString(2, date);
+            stmt.setString(3, time);
+            stmt.setString(4, status);
             stmt.executeUpdate();
         }
     }
