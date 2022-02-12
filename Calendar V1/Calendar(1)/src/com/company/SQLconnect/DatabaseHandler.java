@@ -67,7 +67,7 @@ public class DatabaseHandler extends Configs {
         }
     }
 
-    public void readingdatapulse() throws ClassNotFoundException, SQLException {
+    public void readingdatapulse() throws ClassNotFoundException, SQLException {//Считывает данные из базы данных и выводит пульс(введенный пользователем) с датой измерения
         try {
             Connection con = DriverManager.getConnection(connectionString, dbUser, dbPass);
             Example.datastr1="";
@@ -94,7 +94,7 @@ public class DatabaseHandler extends Configs {
         }
     }
 
-    public void readingdataforselectdate(String date) throws ClassNotFoundException, SQLException {
+    public void readingdataforselectdate(String date) throws ClassNotFoundException, SQLException {//Читает данные из базы данных и выводит занятие и время выбранной пользователем даты
         try {
             Connection con = DriverManager.getConnection(connectionString, dbUser, dbPass);
             Example.selectdate="";
@@ -105,11 +105,13 @@ public class DatabaseHandler extends Configs {
                 while (rs.next()) {
                     String str = rs.getString(2);
                     String str2 = rs.getString(3);
+                    String str3 = rs.getString(4);
+                    String str4 = rs.getString(5);
                     if(date.equals(str2)) {
                         Example.selectdateconst++;
                         String message = "";
                         String message1 = "" + Example.selectdateconst + ")";
-                        message += Example.selectdate + message1 + str + " " + "(" + str2 + ")" + "\n";
+                        message += Example.selectdate + message1 + str + " " + "(" + str3 + ") " + str4 + "\n";
                         Example.selectdate = message;
                     }
                 }

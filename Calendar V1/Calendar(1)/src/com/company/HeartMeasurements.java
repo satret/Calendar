@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 public class HeartMeasurements extends JFrame {
     //Cоздаем кнопки и объекты
     private JButton button = new JButton("Ввод");
+    private JButton closeButton = new JButton("Вернуться назад");
     private JTextField input = new JTextField("",5);
     private JLabel label = new JLabel("Введите пульс");
     private int pulse;
@@ -20,18 +21,21 @@ public class HeartMeasurements extends JFrame {
 
     public HeartMeasurements(){
         super("Пульс в течение дня");
-        this.setBounds(200, 200, 500, 200);
+        this.setBounds(200, 200, 1000, 400);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         //Расставляем компоненты по местам
         Container container = this.getContentPane();
-        container.setLayout(new GridLayout(3, 2, 2, 2));
+        container.setLayout(new GridLayout(4, 2, 2, 2));
         container.add(label);
         container.add(input);
 
         //Расставляем кнопки по местам
         ButtonGroup group = new ButtonGroup();
         button.addActionListener(new ButtonEventListener ());
+        closeButton.addActionListener(new ButtonEventListener2 ());
         container.add(button);
+        container.add(closeButton);
     }
 
     DatabaseHandler dbHandler = new DatabaseHandler();
@@ -69,7 +73,13 @@ public class HeartMeasurements extends JFrame {
         }
     }
 
-
+    class ButtonEventListener2 implements ActionListener {//вызов класса измерения пульса
+        public void actionPerformed(ActionEvent e) {
+            setVisible(false);
+            FirstDay firstday = new FirstDay();
+            firstday.setVisible(true);
+        }
+    }
 }
 
 
