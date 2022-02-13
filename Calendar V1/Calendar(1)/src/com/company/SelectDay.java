@@ -38,7 +38,7 @@ public class SelectDay extends JFrame {
         public void actionPerformed(ActionEvent e){
             //вызов метода ввода в БД
             try {
-                dbHandler.readingdataforselectdate(input.getText());
+                dbHandler.readingdataandsort(input.getText());
             } catch (ClassNotFoundException ex) {
                 ex.printStackTrace();
             } catch (SQLException ex) {

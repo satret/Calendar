@@ -39,6 +39,7 @@ public class FirstDay extends JFrame {
 
     class ButtonEventListener implements ActionListener {//вызов класса расписания
         public void actionPerformed(ActionEvent e) {
+            setVisible(false);
             Schedule app = new Schedule();
             app.setVisible(true);
         }

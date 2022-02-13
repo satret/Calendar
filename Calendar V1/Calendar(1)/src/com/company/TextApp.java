@@ -23,7 +23,6 @@ public class TextApp extends Application
         caption.setFill(Color.BLACK);
         caption.setStyle("-fx-font: 24 arial;");
 
-
         Stage dialogStage = new Stage();
         dialogStage.initStyle(StageStyle.UTILITY);
         dialogStage.setScene(new Scene(VBoxBuilder.create().children(caption).alignment(Pos.CENTER)

@@ -1,5 +1,6 @@
 package com.company.SQLconnect;
 
+import com.company.ButtonCreator;
 import com.company.Example;
 
 import java.sql.*;
@@ -29,6 +30,7 @@ public class DatabaseHandler extends Configs {
             stmt.executeUpdate();
         }
     }
+
     public void addcolomnspheartrhythm(int a, String times) throws ClassNotFoundException, SQLException {
         try (Connection conn = DriverManager.getConnection(connectionString, dbUser, dbPass);
              Statement statement = conn.createStatement()) {
@@ -40,32 +42,32 @@ public class DatabaseHandler extends Configs {
         }
     }
 
-    public void readingdata() throws ClassNotFoundException, SQLException {
-        try {
-            Connection con = DriverManager.getConnection(connectionString, dbUser, dbPass);
-            Example.datastr="";
-            Example.dataconst=0;
-            try {
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT * FROM Books");
-                while (rs.next()) {
-                    String str = rs.getString(2);
-                    String str2 = rs.getString(3);
-                    Example.dataconst++;
-                    String message = "";
-                    String message1="" + Example.dataconst + ")";
-                    message +=  Example.datastr + message1 + str + " " + "(" + str2 + ")" + "\n";
-                    Example.datastr = message;
-                }
-                rs.close();
-                stmt.close();
-            } finally {
-                con.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public void readingdata() throws ClassNotFoundException, SQLException {
+//        try {
+//            Connection con = DriverManager.getConnection(connectionString, dbUser, dbPass);
+//            Example.datastr="";
+//            Example.dataconst=0;
+//            try {
+//                Statement stmt = con.createStatement();
+//                ResultSet rs = stmt.executeQuery("SELECT * FROM Books");
+//                while (rs.next()) {
+//                    String str = rs.getString(2);
+//                    String str2 = rs.getString(3);
+//                    Example.dataconst++;
+//                    String message = "";
+//                    String message1="" + Example.dataconst + ")";
+//                    message +=  Example.datastr + message1 + str + " " + "(" + str2 + ")" + "\n";
+//                    Example.datastr = message;
+//                }
+//                rs.close();
+//                stmt.close();
+//            } finally {
+//                con.close();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public void readingdatapulse() throws ClassNotFoundException, SQLException {//Считывает данные из базы данных и выводит пульс(введенный пользователем) с датой измерения
         try {
@@ -93,25 +95,85 @@ public class DatabaseHandler extends Configs {
             e.printStackTrace();
         }
     }
+    /*
+//    public void readingdataforselectdate(String date) throws ClassNotFoundException, SQLException {//Читает данные из базы данных и выводит занятие и время выбранной пользователем даты
+//        try {
+//            Connection con = DriverManager.getConnection(connectionString, dbUser, dbPass);
+//            Example.selectdate="";
+//            Example.selectdateconst=0;
+//            try {
+//                Statement stmt = con.createStatement();
+//                ResultSet rs = stmt.executeQuery("SELECT * FROM Books");
+//                while (rs.next()) {
+//                    String str = rs.getString(2);
+//                    String str2 = rs.getString(3);
+//                    String str3 = rs.getString(4);
+//                    String str4 = rs.getString(5);
+//                    if(date.equals(str2)) {
+//                        Example.selectdateconst++;
+//                        String message = "";
+//                        String message1 = "" + Example.selectdateconst + ")";
+//                        message += Example.selectdate + message1 +" " + str3 + " " + str +" "+ str4 + "\n";
+//                        Example.selectdate = message;
+//                    }
+//                }
+//                rs.close();
+//                stmt.close();
+//            } finally {
+//                con.close();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
-    public void readingdataforselectdate(String date) throws ClassNotFoundException, SQLException {//Читает данные из базы данных и выводит занятие и время выбранной пользователем даты
+
+
+
+    public void readingdataforcreatebutton() throws ClassNotFoundException, SQLException {//Читает данные из базы данных и выводит занятие и время выбранной пользователем даты
         try {
             Connection con = DriverManager.getConnection(connectionString, dbUser, dbPass);
-            Example.selectdate="";
-            Example.selectdateconst=0;
+            Example.selectdate = "";
+            Example.selectdateconst = 0;
             try {
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT * FROM Books");
                 while (rs.next()) {
-                    String str = rs.getString(2);
-                    String str2 = rs.getString(3);
-                    String str3 = rs.getString(4);
                     String str4 = rs.getString(5);
-                    if(date.equals(str2)) {
+                    System.out.println("sao+\n");
+                    //ButtonCreator app = new ButtonCreator(str4);
+                    //app.setVisible(true);
+                }
+                rs.close();
+                stmt.close();
+            } finally {
+                con.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+     */
+
+    public void readingdataandsort(String date) throws ClassNotFoundException, SQLException {//Читает данные из базы данных и выводит занятие и время выбранной пользователем даты
+        try {
+            Connection con = DriverManager.getConnection(connectionString, dbUser, dbPass);
+            Example.selectdate = "";
+            Example.selectdateconst = 0;
+            try {
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT * FROM books WHERE id>0 ORDER BY time");
+                while (rs.next()) {
+                    String str = rs.getString(2);
+                    String str1 = rs.getString(3);
+                    String str2 = rs.getString(4);
+                    String str3 = rs.getString(5);
+                    if(date.equals(str1)) {
                         Example.selectdateconst++;
                         String message = "";
                         String message1 = "" + Example.selectdateconst + ")";
-                        message += Example.selectdate + message1 + str + " " + "(" + str3 + ") " + str4 + "\n";
+                        message += Example.selectdate + message1 +" " + str2 + " " + str +" "+ str3 + "\n";
                         Example.selectdate = message;
                     }
                 }
@@ -125,6 +187,38 @@ public class DatabaseHandler extends Configs {
         }
     }
 
+
+    public void readingdataandchangestatus(String name, String date, String time, String status) throws ClassNotFoundException, SQLException {//Читает данные из базы данных и выводит занятие и время выбранной пользователем даты
+        try {
+            Connection con = DriverManager.getConnection(connectionString, dbUser, dbPass);
+            Example.selectdate = "";
+            Example.selectdateconst = 0;
+            try {
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT * FROM Books");
+                while (rs.next()) {
+                    String str = rs.getString(2);
+                    String str1 = rs.getString(3);
+                    String str2 = rs.getString(4);
+                    String str3 = rs.getString(1);
+                    if(name.equals(str) && date.equals(str1) && time.equals(str2)) {
+
+                        String sql1 = "UPDATE books SET status = (?) WHERE id = (?)";
+                        PreparedStatement stmt1 = con.prepareStatement(sql1);
+                        stmt1.setString(1, status);
+                        stmt1.setString(2, str3);
+                        stmt1.executeUpdate();
+                    }
+                }
+                rs.close();
+                stmt.close();
+            } finally {
+                con.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

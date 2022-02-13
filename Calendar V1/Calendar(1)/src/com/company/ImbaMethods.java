@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.*;
 
-public class ImbaMethods {
+public class ImbaMethods extends JFrame{
     public static int convertstringtoint(String s, int a){
         try
         {
@@ -20,8 +20,8 @@ public class ImbaMethods {
         return a;
     }
     public void createButton(String s){
-        //JButton button = new JButton("Ввод");
-        //ButtonGroup group = new ButtonGroup();
+        JButton button = new JButton("Ввод");
+        ButtonGroup group = new ButtonGroup();
         //button.addActionListener(new createButton.ButtonEventListener());
         //container.add(button);
     }
